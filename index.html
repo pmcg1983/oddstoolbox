@@ -1,91 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Odds Toolbox - Odds Converter</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odds Toolbox - Free Odds Converter</title>
+  <meta
+    name="description"
+    content="Convert decimal, fractional, and American odds instantly with Odds Toolbox. Free betting odds converter with implied probability."
+  />
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial;
-      background: #f4f4f4;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+    }
+
+    .wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .hero {
       text-align: center;
-      padding: 40px;
+      margin-bottom: 28px;
     }
-    .box {
-      background: white;
-      padding: 20px;
-      max-width: 400px;
-      margin: auto;
-      border-radius: 10px;
+
+    .badge {
+      display: inline-block;
+      background: #e8eefc;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
     }
-    input, select {
-      padding: 10px;
-      margin: 10px;
-      width: 80%;
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.1;
+      margin: 0 0 12px;
     }
-    .result {
-      margin-top: 20px;
-      font-weight: bold;
+
+    .subtext {
+      max-width: 680px;
+      margin: 0 auto;
+      color: #4b5563;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+      padding: 24px;
+      margin-top: 28px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #374151;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 14px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      font-size: 16px;
+      background: #fff;
+      color: #111827;
+      outline: none;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .examples {
+      margin-top: 14px;
+    }
+
+    .example-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .example-buttons button {
+      border: none;
+      background: #eef2ff;
+      color: #1e3a8a;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .example-buttons button:hover {
+      background: #dbeafe;
+    }
+
+    .results {
+      display: grid;
+      gap: 12px;
+    }
+
+    .result-box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: left;
+    }
+
+    .result-label {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .result-value {
+      font-size: 24px;
+      font-weight: 800;
+      color: #111827;
+      word-break: break-word;
+    }
+
+    .error {
+      margin-top: 14px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .content {
+      margin-top: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .content-block {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .content-block h2 {
+      margin-top: 0;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .content-block p,
+    .content-block li {
+      color: #4b5563;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .content-block ul {
+      padding-left: 20px;
+      margin: 12px 0 0;
+    }
+
+    .footer {
+      text-align: center;
+      color: #6b7280;
+      margin-top: 32px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .subtext {
+        font-size: 16px;
+      }
+
+      .result-value {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="wrapper">
+    <div class="hero">
+      <div class="badge">Odds Toolbox</div>
+      <h1>Free Odds Converter</h1>
+      <p class="subtext">
+        Convert decimal, fractional, and American odds instantly. Use this free betting odds converter
+        to compare prices and understand the implied probability behind any market.
+      </p>
+    </div>
 
-<div class="box">
-  <h2>Odds Converter</h2>
+    <div class="card">
+      <div class="grid">
+        <div>
+          <div class="section-title">Enter your odds</div>
 
-  <select id="type">
-    <option value="decimal">Decimal</option>
-    <option value="fractional">Fractional</option>
-    <option value="american">American</option>
-  </select>
+          <label for="type">Odds format</label>
+          <select id="type">
+            <option value="decimal">Decimal</option>
+            <option value="fractional">Fractional</option>
+            <option value="american">American</option>
+          </select>
 
-  <br>
+          <div style="height: 16px;"></div>
 
-  <input id="input" placeholder="Enter odds">
+          <label for="input">Odds value</label>
+          <input id="input" placeholder="e.g. 2.50" />
 
-  <div class="result" id="output"></div>
-</div>
+          <div class="examples">
+            <div class="section-title">Quick examples</div>
+            <div class="example-buttons" id="exampleButtons"></div>
+          </div>
 
-<script>
-function convert() {
-  let type = document.getElementById("type").value;
-  let input = document.getElementById("input").value;
-  let decimal;
+          <div class="error" id="errorBox"></div>
+        </div>
 
-  if (!input) {
-    document.getElementById("output").innerHTML = "";
-    return;
-  }
+        <div>
+          <div class="section-title">Converted odds</div>
 
-  try {
-    if (type === "decimal") {
-      decimal = parseFloat(input);
-    } else if (type === "fractional") {
-      let parts = input.split("/");
-      decimal = (parseFloat(parts[0]) / parseFloat(parts[1])) + 1;
-    } else {
-      let american = parseFloat(input);
-      decimal = american > 0 ? (american / 100) + 1 : (100 / Math.abs(american)) + 1;
+          <div class="results">
+            <div class="result-box">
+              <div class="result-label">Decimal</div>
+              <div class="result-value" id="decimalResult">—</div>
+            </div>
+
+            <div class="result-box">
+              <div class="result-label">Fractional</div>
+              <div class="result-value" id="fractionalResult">—</div>
+            </div>
+
+            <div class="result-box">
+              <div class="result-label">American</div>
+              <div class="result-value" id="americanResult">—</div>
+            </div>
+
+            <div class="result-box">
+              <div class="result-label">Implied Probability</div>
+              <div class="result-value" id="probabilityResult">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="content-block">
+        <h2>How this odds converter works</h2>
+        <p>
+          Decimal odds are popular in Europe, fractional odds are common in UK and Irish betting,
+          and American odds are widely used in the United States. This tool lets you switch between
+          all three instantly.
+        </p>
+      </div>
+
+      <div class="content-block">
+        <h2>What implied probability means</h2>
+        <p>
+          Implied probability shows the percentage chance suggested by the odds. For example, decimal
+          odds of 2.00 imply a 50% chance. This is useful for comparing bookmaker prices and spotting value.
+        </p>
+      </div>
+
+      <div class="content-block">
+        <h2>Common betting odds examples</h2>
+        <ul>
+          <li>2.00 decimal = Evens = +100 American</li>
+          <li>1.50 decimal = 1/2 fractional = -200 American</li>
+          <li>3.50 decimal = 5/2 fractional = +250 American</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      Odds Toolbox © 2026
+    </div>
+  </div>
+
+  <script>
+    const typeSelect = document.getElementById("type");
+    const inputEl = document.getElementById("input");
+    const errorBox = document.getElementById("errorBox");
+
+    const decimalResult = document.getElementById("decimalResult");
+    const fractionalResult = document.getElementById("fractionalResult");
+    const americanResult = document.getElementById("americanResult");
+    const probabilityResult = document.getElementById("probabilityResult");
+    const exampleButtons = document.getElementById("exampleButtons");
+
+    const examples = {
+      decimal: ["1.91", "2.50", "6.00"],
+      fractional: ["10/11", "6/4", "5/1"],
+      american: ["-110", "+150", "+500"]
+    };
+
+    function gcd(a, b) {
+      a = Math.abs(a);
+      b = Math.abs(b);
+      while (b) {
+        const temp = b;
+        b = a % b;
+        a = temp;
+      }
+      return a || 1;
     }
 
-    let fractional = (decimal - 1).toFixed(2);
-    let american = decimal >= 2
-      ? "+" + ((decimal - 1) * 100).toFixed(0)
-      : (-100 / (decimal - 1)).toFixed(0);
+    function decimalToFractional(decimalOdds) {
+      const fractional = decimalOdds - 1;
+      const precision = 1000;
 
-    document.getElementById("output").innerHTML =
-      "Decimal: " + decimal.toFixed(2) + "<br>" +
-      "Fractional: " + fractional + "<br>" +
-      "American: " + american;
+      let numerator = Math.round(fractional * precision);
+      let denominator = precision;
 
-  } catch {
-    document.getElementById("output").innerText = "Invalid input";
-  }
-}
+      const divisor = gcd(numerator, denominator);
+      numerator /= divisor;
+      denominator /= divisor;
 
-document.getElementById("input").addEventListener("input", convert);
-document.getElementById("type").addEventListener("change", convert);
-</script>
+      return `${numerator}/${denominator}`;
+    }
 
+    function fractionalToDecimal(value) {
+      const parts = value.split("/").map(part => part.trim());
+
+      if (parts.length !== 2) {
+        throw new Error("Use fractional odds in the format 5/2");
+      }
+
+      const numerator = Number(parts[0]);
+      const denominator = Number(parts[1]);
+
+      if (!Number.isFinite(numerator) || !Number.isFinite(denominator) || denominator === 0) {
+        throw new Error("Fractional odds must be valid numbers like 5/2");
+      }
+
+      return numerator / denominator + 1;
+    }
+
+    function americanToDecimal(value) {
+      const american = Number(value);
+
+      if (!Number.isFinite(american) || american === 0) {
+        throw new Error("American odds must be a valid number like +150 or -200");
+      }
+
+      if (american > 0) {
+        return american / 100 + 1;
+      }
+
+      return 100 / Math.abs(american) + 1;
+    }
+
+    function decimalToAmerican(decimalOdds) {
+      if (decimalOdds >= 2) {
+        return `+${Math.round((decimalOdds - 1) * 100)}`;
+      }
+
+      return `${Math.round(-100 / (decimalOdds - 1))}`;
+    }
+
+    function impliedProbability(decimalOdds) {
+      return `${(100 / decimalOdds).toFixed(2)}%`;
+    }
+
+    function formatDecimal(decimalOdds) {
+      return Number(decimalOdds).toFixed(2);
+    }
+
+    function setExamples() {
+      const currentType = typeSelect.value;
+      exampleButtons.innerHTML = "";
+
+      examples[currentType].forEach(example => {
+        const button = document.createElement("button");
+        button.textContent = example;
+        button.addEventListener("click", () => {
+          inputEl.value = example;
+          convert();
+        });
+        exampleButtons.appendChild(button);
+      });
+
+      if (currentType === "decimal") inputEl.placeholder = "e.g. 2.50";
+      if (currentType === "fractional") inputEl.placeholder = "e.g. 6/4";
+      if (currentType === "american") inputEl.placeholder = "e.g. +150";
+    }
+
+    function resetResults() {
+      decimalResult.textContent = "—";
+      fractionalResult.textContent = "—";
+      americanResult.textContent = "—";
+      probabilityResult.textContent = "—";
+    }
+
+    function showError(message) {
+      errorBox.style.display = "block";
+      errorBox.textContent = message;
+    }
+
+    function hideError() {
+      errorBox.style.display = "none";
+      errorBox.textContent = "";
+    }
+
+    function convert() {
+      const inputType = typeSelect.value;
+      const inputValue = inputEl.value.trim();
+
+      if (!inputValue) {
+        hideError();
+        resetResults();
+        return;
+      }
+
+      try {
+        let decimalOdds;
+
+        if (inputType === "decimal") {
+          decimalOdds = Number(inputValue);
+          if (!Number.isFinite(decimalOdds) || decimalOdds <= 1) {
+            throw new Error("Decimal odds must be greater than 1.00");
+          }
+        } else if (inputType === "fractional") {
+          decimalOdds = fractionalToDecimal(inputValue);
+          if (decimalOdds <= 1) {
+            throw new Error("Fractional odds must convert to more than 1.00");
+          }
+        } else {
+          decimalOdds = americanToDecimal(inputValue);
+          if (decimalOdds <= 1) {
+            throw new Error("American odds must convert to more than 1.00");
+          }
+        }
+
+        hideError();
+        decimalResult.textContent = formatDecimal(decimalOdds);
+        fractionalResult.textContent = decimalToFractional(decimalOdds);
+        americanResult.textContent = decimalToAmerican(decimalOdds);
+        probabilityResult.textContent = impliedProbability(decimalOdds);
+      } catch (error) {
+        resetResults();
+        showError(error.message);
+      }
+    }
+
+    typeSelect.addEventListener("change", () => {
+      inputEl.value = "";
+      hideError();
+      resetResults();
+      setExamples();
+    });
+
+    inputEl.addEventListener("input", convert);
+
+    setExamples();
+  </script>
 </body>
 </html>
