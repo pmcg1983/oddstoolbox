@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Odds Toolbox - Odds Converter</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 40px;
+    }
+    .box {
+      background: white;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+      border-radius: 10px;
+    }
+    input, select {
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Odds Converter</h2>
+
+  <select id="type">
+    <option value="decimal">Decimal</option>
+    <option value="fractional">Fractional</option>
+    <option value="american">American</option>
+  </select>
+
+  <br>
+
+  <input id="input" placeholder="Enter odds">
+
+  <div class="result" id="output"></div>
+</div>
+
+<script>
+function convert() {
+  let type = document.getElementById("type").value;
+  let input = document.getElementById("input").value;
+  let decimal;
+
+  if (!input) {
+    document.getElementById("output").innerHTML = "";
+    return;
+  }
+
+  try {
+    if (type === "decimal") {
+      decimal = parseFloat(input);
+    } else if (type === "fractional") {
+      let parts = input.split("/");
+      decimal = (parseFloat(parts[0]) / parseFloat(parts[1])) + 1;
+    } else {
+      let american = parseFloat(input);
+      decimal = american > 0 ? (american / 100) + 1 : (100 / Math.abs(american)) + 1;
+    }
+
+    let fractional = (decimal - 1).toFixed(2);
+    let american = decimal >= 2
+      ? "+" + ((decimal - 1) * 100).toFixed(0)
+      : (-100 / (decimal - 1)).toFixed(0);
+
+    document.getElementById("output").innerHTML =
+      "Decimal: " + decimal.toFixed(2) + "<br>" +
+      "Fractional: " + fractional + "<br>" +
+      "American: " + american;
+
+  } catch {
+    document.getElementById("output").innerText = "Invalid input";
+  }
+}
+
+document.getElementById("input").addEventListener("input", convert);
+document.getElementById("type").addEventListener("change", convert);
+</script>
+
+</body>
+</html>
