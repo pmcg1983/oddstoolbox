@@ -268,6 +268,7 @@
             <option value="decimal">Decimal</option>
             <option value="fractional">Fractional</option>
             <option value="american">American</option>
+            <option value="probability">Probability (%)</option>
           </select>
 
           <div style="height: 16px;"></div>
@@ -348,19 +349,20 @@
     const typeSelect = document.getElementById("type");
     const inputEl = document.getElementById("input");
     const errorBox = document.getElementById("errorBox");
-
+  
     const decimalResult = document.getElementById("decimalResult");
     const fractionalResult = document.getElementById("fractionalResult");
     const americanResult = document.getElementById("americanResult");
     const probabilityResult = document.getElementById("probabilityResult");
     const exampleButtons = document.getElementById("exampleButtons");
-
+  
     const examples = {
       decimal: ["1.91", "2.50", "6.00"],
       fractional: ["10/11", "6/4", "5/1"],
-      american: ["-110", "+150", "+500"]
+      american: ["-110", "+150", "+500"],
+      probability: ["52.36", "40", "25"]
     };
-
+  
     function gcd(a, b) {
       a = Math.abs(a);
       b = Math.abs(b);
@@ -371,117 +373,132 @@
       }
       return a || 1;
     }
-
+  
     function decimalToFractional(decimalOdds) {
       const fractional = decimalOdds - 1;
       const precision = 1000;
-
+  
       let numerator = Math.round(fractional * precision);
       let denominator = precision;
-
+  
       const divisor = gcd(numerator, denominator);
       numerator /= divisor;
       denominator /= divisor;
-
+  
       return `${numerator}/${denominator}`;
     }
-
+  
     function fractionalToDecimal(value) {
       const parts = value.split("/").map(part => part.trim());
-
+  
       if (parts.length !== 2) {
         throw new Error("Use fractional odds in the format 5/2");
       }
-
+  
       const numerator = Number(parts[0]);
       const denominator = Number(parts[1]);
-
+  
       if (!Number.isFinite(numerator) || !Number.isFinite(denominator) || denominator === 0) {
         throw new Error("Fractional odds must be valid numbers like 5/2");
       }
-
+  
       return numerator / denominator + 1;
     }
-
+  
     function americanToDecimal(value) {
       const american = Number(value);
-
+  
       if (!Number.isFinite(american) || american === 0) {
         throw new Error("American odds must be a valid number like +150 or -200");
       }
-
+  
       if (american > 0) {
         return american / 100 + 1;
       }
-
+  
       return 100 / Math.abs(american) + 1;
     }
-
+  
+    function probabilityToDecimal(value) {
+      const probability = Number(value);
+  
+      if (!Number.isFinite(probability) || probability <= 0 || probability >= 100) {
+        throw new Error("Probability must be a number greater than 0 and less than 100");
+      }
+  
+      return 100 / probability;
+    }
+  
     function decimalToAmerican(decimalOdds) {
       if (decimalOdds >= 2) {
         return `+${Math.round((decimalOdds - 1) * 100)}`;
       }
-
+  
       return `${Math.round(-100 / (decimalOdds - 1))}`;
     }
-
+  
     function impliedProbability(decimalOdds) {
-      return `${(100 / decimalOdds).toFixed(2)}%`;
+      return (100 / decimalOdds);
     }
-
+  
+    function formatProbability(decimalOdds) {
+      return `${impliedProbability(decimalOdds).toFixed(2)}%`;
+    }
+  
     function formatDecimal(decimalOdds) {
       return Number(decimalOdds).toFixed(2);
     }
-
+  
     function setExamples() {
       const currentType = typeSelect.value;
       exampleButtons.innerHTML = "";
-
+  
       examples[currentType].forEach(example => {
         const button = document.createElement("button");
-        button.textContent = example;
+        button.textContent = currentType === "probability" ? `${example}%` : example;
         button.addEventListener("click", () => {
           inputEl.value = example;
           convert();
         });
         exampleButtons.appendChild(button);
       });
-
+  
       if (currentType === "decimal") inputEl.placeholder = "e.g. 2.50";
       if (currentType === "fractional") inputEl.placeholder = "e.g. 6/4";
       if (currentType === "american") inputEl.placeholder = "e.g. +150";
+      if (currentType === "probability") inputEl.placeholder = "e.g. 52.36";
     }
-
+  
     function resetResults() {
       decimalResult.textContent = "—";
       fractionalResult.textContent = "—";
       americanResult.textContent = "—";
       probabilityResult.textContent = "—";
     }
-
+  
     function showError(message) {
       errorBox.style.display = "block";
       errorBox.textContent = message;
     }
-
+  
     function hideError() {
       errorBox.style.display = "none";
       errorBox.textContent = "";
     }
-
+  
     function convert() {
       const inputType = typeSelect.value;
       const inputValue = inputEl.value.trim();
-
+  
       if (!inputValue) {
         hideError();
         resetResults();
         return;
       }
-
+  
       try {
         let decimalOdds;
-
+  
         if (inputType === "decimal") {
           decimalOdds = Number(inputValue);
           if (!Number.isFinite(decimalOdds) || decimalOdds <= 1) {
@@ -492,34 +509,43 @@
           if (decimalOdds <= 1) {
             throw new Error("Fractional odds must convert to more than 1.00");
           }
-        } else {
+        } else if (inputType === "american") {
           decimalOdds = americanToDecimal(inputValue);
           if (decimalOdds <= 1) {
             throw new Error("American odds must convert to more than 1.00");
           }
+        } else if (inputType === "probability") {
+          decimalOdds = probabilityToDecimal(inputValue);
+          if (decimalOdds <= 1) {
+            throw new Error("Probability must convert to more than 1.00 decimal");
+          }
         }
-
+  
         hideError();
         decimalResult.textContent = formatDecimal(decimalOdds);
         fractionalResult.textContent = decimalToFractional(decimalOdds);
         americanResult.textContent = decimalToAmerican(decimalOdds);
-        probabilityResult.textContent = impliedProbability(decimalOdds);
+        probabilityResult.textContent = formatProbability(decimalOdds);
       } catch (error) {
         resetResults();
         showError(error.message);
       }
     }
-
+  
     typeSelect.addEventListener("change", () => {
       inputEl.value = "";
       hideError();
       resetResults();
       setExamples();
     });
-
+  
     inputEl.addEventListener("input", convert);
-
+  
     setExamples();
+  
+    window.addEventListener("load", () => {
+      convert();
+    });
   </script>
 </body>
 </html>
