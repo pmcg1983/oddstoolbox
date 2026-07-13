@@ -284,11 +284,58 @@
       text-decoration: underline;
     }
 
+    .tool-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .tool-card {
+      display: block;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      color: #111827;
+      text-decoration: none;
+      background: #f8fafc;
+    }
+
+    .tool-card:hover {
+      border-color: #bfdbfe;
+      background: #eff6ff;
+    }
+
+    .tool-card strong {
+      display: block;
+      color: #1d4ed8;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .tool-card span {
+      display: block;
+      color: #4b5563;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
     .footer {
       text-align: center;
       color: #6b7280;
       margin-top: 32px;
       font-size: 14px;
+    }
+
+    .footer .last-updated {
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    .footer p {
+      max-width: 720px;
+      margin: 10px auto 0;
+      line-height: 1.6;
     }
     
     .logo {
@@ -319,6 +366,10 @@
       .result-value {
         font-size: 22px;
       }
+
+      .tool-card-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -348,6 +399,43 @@
         Convert decimal, fractional, and American odds instantly. Use this free betting odds converter
         to compare prices and understand the implied probability behind any market.
       </p>
+    </div>
+
+    <div class="content">
+      <div class="content-block">
+        <h2>Free betting calculators and odds tools</h2>
+        <p>
+          Odds Toolbox is a collection of free calculators for converting odds, checking implied
+          probability, estimating bet returns, working out each way bets, and comparing prediction
+          market prices. Each tool is built for quick educational use, with no sign-up required.
+        </p>
+      </div>
+
+      <div class="content-block">
+        <h2>Choose a calculator</h2>
+        <div class="tool-card-grid">
+          <a class="tool-card" href="index.html">
+            <strong>Odds Converter</strong>
+            <span>Convert decimal, fractional, American odds, and implied probability.</span>
+          </a>
+          <a class="tool-card" href="bet-calculator.html">
+            <strong>Bet Calculator</strong>
+            <span>Calculate total return, profit, probability, and converted odds.</span>
+          </a>
+          <a class="tool-card" href="each-way-calculator.html">
+            <strong>Each Way Calculator</strong>
+            <span>Work out win returns, place returns, total stake, and profit.</span>
+          </a>
+          <a class="tool-card" href="implied-probability.html">
+            <strong>Implied Probability Calculator</strong>
+            <span>Turn betting odds into percentage chance and compare prices clearly.</span>
+          </a>
+          <a class="tool-card" href="prediction-calculator.html">
+            <strong>Prediction Market Calculator</strong>
+            <span>Convert prediction market prices into odds and implied probability.</span>
+          </a>
+        </div>
+      </div>
     </div>
 
     <div class="card">
@@ -443,7 +531,12 @@
     </div>
 
     <div class="footer">
-      Odds Toolbox © 2026
+      <div>Odds Toolbox © 2026</div>
+      <div class="last-updated">Last updated: July 2026</div>
+      <p>
+        Odds Toolbox is for educational and informational use only. Betting involves risk; only bet
+        what you can afford to lose and follow responsible gambling guidance in your location.
+      </p>
     </div>
   </div>
 

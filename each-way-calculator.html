@@ -299,6 +299,17 @@
       font-size: 14px;
     }
 
+    .footer .last-updated {
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    .footer p {
+      max-width: 720px;
+      margin: 10px auto 0;
+      line-height: 1.6;
+    }
+
     @media (max-width: 760px) {
       .grid {
         grid-template-columns: 1fr;
@@ -344,7 +355,10 @@
 
           <label for="stake">Stake per part</label>
           <input id="stake" type="number" min="0" step="0.01" value="10" placeholder="e.g. 10" />
-          <div class="helper">A €10 each way bet costs €20 total: €10 win plus €10 place.</div>
+          <div class="helper">
+            Stake per part means the amount placed on each half of the each way bet. A €10 each way
+            bet costs €20 total: €10 on the win part and €10 on the place part.
+          </div>
 
           <div class="field-space"></div>
 
@@ -425,7 +439,8 @@
         <h2>How each way betting works</h2>
         <p>
           An each way bet is two bets: one on the selection to win and one on the selection to place.
-          The stake you enter is the stake for each part, so the total outlay is always double that amount.
+          The stake per part is not the total cost. It is the amount used for the win part and the same
+          amount again for the place part, so the total outlay is always double the stake you enter.
         </p>
       </div>
 
@@ -459,7 +474,12 @@
     </div>
 
     <div class="footer">
-      Odds Toolbox © 2026
+      <div>Odds Toolbox © 2026</div>
+      <div class="last-updated">Last updated: July 2026</div>
+      <p>
+        Odds Toolbox is for educational and informational use only. Betting involves risk; only bet
+        what you can afford to lose and follow responsible gambling guidance in your location.
+      </p>
     </div>
   </div>
 
