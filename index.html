@@ -3,12 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Odds Converter & Probability Calculator | Odds Toolbox</title>
+  <title>Odds Converter | Decimal, Fractional & American Odds | Odds Toolbox</title>
   <meta
     name="description"
-    content="Convert decimal, fractional, and American odds instantly with Odds Toolbox. Free betting odds converter with implied probability."
+    content="Free odds converter for decimal, fractional, and American odds. Convert betting odds instantly and see implied probability with Odds Toolbox."
   />
   <link rel="canonical" href="https://www.oddstoolbox.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Odds Toolbox" />
+  <meta property="og:title" content="Odds Converter | Odds Toolbox" />
+  <meta property="og:description" content="Convert decimal, fractional, and American odds instantly and see implied probability." />
+  <meta property="og:url" content="https://www.oddstoolbox.com/" />
+  <meta property="og:image" content="https://www.oddstoolbox.com/logo-tight.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Odds Converter | Odds Toolbox" />
+  <meta name="twitter:description" content="Free decimal, fractional, and American odds converter with implied probability." />
+  <meta name="twitter:image" content="https://www.oddstoolbox.com/logo-tight.png" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://www.oddstoolbox.com/#website",
+          "name": "Odds Toolbox",
+          "url": "https://www.oddstoolbox.com/"
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://www.oddstoolbox.com/#odds-converter",
+          "name": "Odds Converter",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Any",
+          "url": "https://www.oddstoolbox.com/",
+          "description": "Free calculator for converting decimal, fractional, and American betting odds with implied probability.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://www.oddstoolbox.com/#breadcrumbs",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Odds Converter",
+              "item": "https://www.oddstoolbox.com/"
+            }
+          ]
+        }
+      ]
+    }
+  </script>
   <style>
     * {
       box-sizing: border-box;
@@ -219,6 +268,22 @@
       margin: 12px 0 0;
     }
 
+    .tool-links {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .tool-links a {
+      color: #1d4ed8;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .tool-links a:hover {
+      text-decoration: underline;
+    }
+
     .footer {
       text-align: center;
       color: #6b7280;
@@ -364,6 +429,16 @@
           <li>1.50 decimal = 1/2 fractional = -200 American = 66.67%</li>
           <li>3.50 decimal = 5/2 fractional = +250 American = 28.57%</li>
         </ul>
+      </div>
+
+      <div class="content-block">
+        <h2>More betting calculators</h2>
+        <div class="tool-links">
+          <a href="bet-calculator.html">Bet Calculator</a>
+          <a href="each-way-calculator.html">Each Way Calculator</a>
+          <a href="implied-probability.html">Implied Probability Calculator</a>
+          <a href="prediction-calculator.html">Prediction Market Calculator</a>
+        </div>
       </div>
     </div>
 

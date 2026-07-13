@@ -3,12 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prediction Market Calculator | Odds Toolbox</title>
+  <title>Prediction Market Calculator | Price, Odds & Probability | Odds Toolbox</title>
   <meta
     name="description"
-    content="Free prediction market calculator from Odds Toolbox. Convert betting odds, implied probability, and prediction market prices instantly."
+    content="Free prediction market calculator. Convert market prices, implied probability, decimal odds, fractional odds, and American odds instantly."
   />
   <link rel="canonical" href="https://www.oddstoolbox.com/prediction-calculator.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Odds Toolbox" />
+  <meta property="og:title" content="Prediction Market Calculator | Odds Toolbox" />
+  <meta property="og:description" content="Convert prediction market prices, probability, and betting odds instantly." />
+  <meta property="og:url" content="https://www.oddstoolbox.com/prediction-calculator.html" />
+  <meta property="og:image" content="https://www.oddstoolbox.com/logo-tight.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Prediction Market Calculator | Odds Toolbox" />
+  <meta name="twitter:description" content="Free prediction market price, odds, and probability converter." />
+  <meta name="twitter:image" content="https://www.oddstoolbox.com/logo-tight.png" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://www.oddstoolbox.com/prediction-calculator.html#prediction-market-calculator",
+          "name": "Prediction Market Calculator",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Any",
+          "url": "https://www.oddstoolbox.com/prediction-calculator.html",
+          "description": "Free calculator for converting prediction market prices, implied probability, and betting odds.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://www.oddstoolbox.com/prediction-calculator.html#breadcrumbs",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Odds Toolbox",
+              "item": "https://www.oddstoolbox.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Prediction Market Calculator",
+              "item": "https://www.oddstoolbox.com/prediction-calculator.html"
+            }
+          ]
+        }
+      ]
+    }
+  </script>
   <style>
     * {
       box-sizing: border-box;
@@ -220,6 +269,22 @@
       margin: 12px 0 0;
     }
 
+    .tool-links {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .tool-links a {
+      color: #1d4ed8;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .tool-links a:hover {
+      text-decoration: underline;
+    }
+
     .footer {
       text-align: center;
       color: #6b7280;
@@ -359,6 +424,16 @@
           looks rich or cheap, and translate percentages into familiar betting odds. It is especially
           useful for users switching between sportsbooks, exchanges, and prediction market platforms.
         </p>
+      </div>
+
+      <div class="content-block">
+        <h2>More betting calculators</h2>
+        <div class="tool-links">
+          <a href="index.html">Odds Converter</a>
+          <a href="bet-calculator.html">Bet Calculator</a>
+          <a href="each-way-calculator.html">Each Way Calculator</a>
+          <a href="implied-probability.html">Implied Probability Calculator</a>
+        </div>
       </div>
     </div>
 
