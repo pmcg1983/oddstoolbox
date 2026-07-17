@@ -83,11 +83,12 @@
 
     .top-nav a {
       display: inline-block;
-      margin: 0 10px;
+      margin: 0 10px 8px;
       color: #1d4ed8;
       text-decoration: none;
       font-weight: 700;
       font-size: 15px;
+      line-height: 1.4;
     }
 
     .top-nav a:hover {
@@ -168,9 +169,14 @@
     }
 
     select:focus,
-    input:focus {
+    input:focus,
+    .example-buttons button:focus-visible,
+    .tool-card:focus-visible,
+    .tool-links a:focus-visible,
+    .top-nav a:focus-visible {
       border-color: #2563eb;
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      outline: none;
     }
 
     .examples {
@@ -454,14 +460,14 @@
           <div style="height: 16px;"></div>
 
           <label for="input">Odds value</label>
-          <input id="input" placeholder="e.g. 2.50" />
+          <input id="input" placeholder="e.g. 2.50" aria-describedby="errorBox" />
 
           <div class="examples">
             <div class="section-title">Quick examples</div>
             <div class="example-buttons" id="exampleButtons"></div>
           </div>
 
-          <div class="error" id="errorBox"></div>
+          <div class="error" id="errorBox" role="alert" aria-live="polite"></div>
         </div>
 
         <div>
@@ -511,12 +517,18 @@
       </div>
 
       <div class="content-block">
-        <h2>Common betting odds examples</h2>
+        <h2>Worked example</h2>
         <ul>
-          <li>2.00 decimal = Evens = +100 American = 50.00%</li>
-          <li>1.50 decimal = 1/2 fractional = -200 American = 66.67%</li>
-          <li>3.50 decimal = 5/2 fractional = +250 American = 28.57%</li>
+          <li>Enter 2.00 as decimal odds.</li>
+          <li>The converter shows Evens fractional odds, +100 American odds, and 50.00% implied probability.</li>
+          <li>This means the odds suggest a one-in-two chance before any bookmaker margin or market fees.</li>
         </ul>
+      </div>
+
+      <div class="content-block">
+        <h2>FAQ</h2>
+        <p><strong>Does implied probability include bookmaker margin?</strong> No. It converts a single price into a percentage before adjusting for overround, commission, or fees.</p>
+        <p><strong>Which odds format should I use?</strong> Use whichever format your bookmaker, exchange, or market displays. The result is the same price shown in different ways.</p>
       </div>
 
       <div class="content-block">

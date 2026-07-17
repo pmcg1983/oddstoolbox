@@ -83,11 +83,12 @@
 
     .top-nav a {
       display: inline-block;
-      margin: 0 10px;
+      margin: 0 10px 8px;
       color: #1d4ed8;
       text-decoration: none;
       font-weight: 700;
       font-size: 15px;
+      line-height: 1.4;
     }
 
     .top-nav a:hover {
@@ -163,9 +164,13 @@
     }
 
     input:focus,
-    select:focus {
+    select:focus,
+    .example-buttons button:focus-visible,
+    .tool-links a:focus-visible,
+    .top-nav a:focus-visible {
       border-color: #2563eb;
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      outline: none;
     }
 
     .field-space {
@@ -351,14 +356,14 @@
           <div class="field-space"></div>
 
           <label for="input">Odds value</label>
-          <input id="input" value="1.91" placeholder="e.g. 1.91" />
+          <input id="input" value="1.91" placeholder="e.g. 1.91" aria-describedby="errorBox" />
 
           <div class="field-space"></div>
 
           <div class="section-title">Quick examples</div>
           <div class="example-buttons" id="exampleButtons"></div>
 
-          <div class="error" id="errorBox"></div>
+          <div class="error" id="errorBox" role="alert" aria-live="polite"></div>
         </div>
 
         <div>
@@ -400,15 +405,14 @@
       </div>
 
       <div class="content-block">
-        <h2>How to calculate implied probability</h2>
+        <h2>Worked example</h2>
         <p>
-          The simplest version is with decimal odds:
+          The simplest version is with decimal odds. For a price of 2.00:
         </p>
         <ul>
           <li>Implied Probability = 100 / Decimal Odds</li>
           <li>2.00 decimal = 50.00%</li>
-          <li>1.91 decimal = 52.36%</li>
-          <li>4.00 decimal = 25.00%</li>
+          <li>This means the odds suggest a 50% chance before any bookmaker margin, exchange commission, or market fees.</li>
         </ul>
       </div>
 
@@ -429,6 +433,12 @@
           <a href="each-way-calculator.html">Each Way Calculator</a>
           <a href="prediction-calculator.html">Prediction Market Calculator</a>
         </div>
+      </div>
+
+      <div class="content-block">
+        <h2>FAQ</h2>
+        <p><strong>Is implied probability a prediction?</strong> No. It is the percentage chance suggested by the odds, not a guarantee that the outcome is fairly priced.</p>
+        <p><strong>Why can different bookmakers imply different probabilities?</strong> Different prices, margins, and market opinions can all produce different implied percentages.</p>
       </div>
     </div>
 

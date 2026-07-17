@@ -83,11 +83,12 @@
 
     .top-nav a {
       display: inline-block;
-      margin: 0 10px;
+      margin: 0 10px 8px;
       color: #1d4ed8;
       text-decoration: none;
       font-weight: 700;
       font-size: 15px;
+      line-height: 1.4;
     }
 
     .top-nav a:hover {
@@ -163,9 +164,13 @@
     }
 
     input:focus,
-    select:focus {
+    select:focus,
+    .example-buttons button:focus-visible,
+    .tool-links a:focus-visible,
+    .top-nav a:focus-visible {
       border-color: #2563eb;
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      outline: none;
     }
 
     .field-space {
@@ -341,7 +346,7 @@
           <div class="section-title">Enter your bet details</div>
 
           <label for="stake">Stake</label>
-          <input id="stake" type="number" min="0" step="0.01" value="10" placeholder="e.g. 10" />
+          <input id="stake" type="number" min="0" step="0.01" value="10" placeholder="e.g. 10" aria-describedby="errorBox" />
 
           <div class="field-space"></div>
 
@@ -357,14 +362,14 @@
           <div class="field-space"></div>
 
           <label for="oddsValue">Odds value</label>
-          <input id="oddsValue" value="1.91" placeholder="e.g. 1.91" />
+          <input id="oddsValue" value="1.91" placeholder="e.g. 1.91" aria-describedby="errorBox" />
 
           <div class="field-space"></div>
 
           <div class="section-title">Quick examples</div>
           <div class="example-buttons" id="exampleButtons"></div>
 
-          <div class="error" id="errorBox"></div>
+          <div class="error" id="errorBox" role="alert" aria-live="polite"></div>
         </div>
 
         <div>
@@ -429,13 +434,18 @@
       </div>
 
       <div class="content-block">
-        <h2>Common bet examples</h2>
+        <h2>Worked example</h2>
         <ul>
-          <li>€10 at 2.00 decimal returns €20.00 for a profit of €10.00</li>
-          <li>€25 at 1/2 fractional returns €37.50 for a profit of €12.50</li>
-          <li>€50 at +150 American returns €125.00 for a profit of €75.00</li>
-          <li>€40 at a $0.40 prediction price returns €100.00 for a profit of €60.00</li>
+          <li>Enter a €10 stake and decimal odds of 2.00.</li>
+          <li>The total return is €20.00 because the return includes your original €10 stake.</li>
+          <li>The profit is €10.00, which is the amount won on top of your stake.</li>
         </ul>
+      </div>
+
+      <div class="content-block">
+        <h2>FAQ</h2>
+        <p><strong>Is total return the same as profit?</strong> No. Total return includes your original stake; profit is only the amount won above the stake.</p>
+        <p><strong>Can I enter prediction market prices?</strong> Yes. Use the prediction price option for prices between $0.00 and $1.00.</p>
       </div>
 
       <div class="content-block">

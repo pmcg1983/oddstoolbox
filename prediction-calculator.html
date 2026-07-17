@@ -83,11 +83,12 @@
 
     .top-nav a {
       display: inline-block;
-      margin: 0 10px;
+      margin: 0 10px 8px;
       color: #1d4ed8;
       text-decoration: none;
       font-weight: 700;
       font-size: 15px;
+      line-height: 1.4;
     }
 
     .top-nav a:hover {
@@ -163,9 +164,13 @@
     }
 
     input:focus,
-    select:focus {
+    select:focus,
+    .example-buttons button:focus-visible,
+    .tool-links a:focus-visible,
+    .top-nav a:focus-visible {
       border-color: #2563eb;
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      outline: none;
     }
 
     .field-space {
@@ -358,7 +363,7 @@
           <div class="field-space"></div>
 
           <label for="input">Value</label>
-          <input id="input" value="0.62" placeholder="e.g. 0.62" />
+          <input id="input" value="0.62" placeholder="e.g. 0.62" aria-describedby="helperText errorBox" />
 
           <div class="helper" id="helperText">
             Enter a prediction market price between 0.01 and 0.99.
@@ -369,7 +374,7 @@
           <div class="section-title">Quick examples</div>
           <div class="example-buttons" id="exampleButtons"></div>
 
-          <div class="error" id="errorBox"></div>
+          <div class="error" id="errorBox" role="alert" aria-live="polite"></div>
         </div>
 
         <div>
@@ -416,15 +421,15 @@
       </div>
 
       <div class="content-block">
-        <h2>Prediction price vs implied probability</h2>
+        <h2>Worked example</h2>
         <p>
-          A prediction market price is just implied probability written as a market price between $0.00
-          and $1.00. That means:
+          A prediction market price is implied probability written as a price between $0.00 and $1.00.
+          For a contract trading at $0.62:
         </p>
         <ul>
-          <li>$0.50 = 50.00% probability = 2.00 decimal odds</li>
-          <li>$0.62 = 62.00% probability = 1.61 decimal odds</li>
-          <li>$0.25 = 25.00% probability = 4.00 decimal odds</li>
+          <li>$0.62 = 62.00% implied probability.</li>
+          <li>That converts to about 1.61 decimal odds.</li>
+          <li>The same price is roughly -163 in American odds.</li>
         </ul>
       </div>
 
@@ -445,6 +450,12 @@
           <a href="each-way-calculator.html">Each Way Calculator</a>
           <a href="implied-probability.html">Implied Probability Calculator</a>
         </div>
+      </div>
+
+      <div class="content-block">
+        <h2>FAQ</h2>
+        <p><strong>Is a $0.62 price always exactly a 62% chance?</strong> It is the market-implied probability before considering fees, liquidity, spread, or your own judgment.</p>
+        <p><strong>Can I compare prediction prices with bookmaker odds?</strong> Yes. Convert both into probability or decimal odds so the prices are easier to compare.</p>
       </div>
     </div>
 

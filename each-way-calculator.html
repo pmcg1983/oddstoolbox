@@ -88,6 +88,7 @@
       text-decoration: none;
       font-weight: 700;
       font-size: 15px;
+      line-height: 1.4;
     }
 
     .top-nav a:hover {
@@ -163,9 +164,13 @@
     }
 
     input:focus,
-    select:focus {
+    select:focus,
+    .example-buttons button:focus-visible,
+    .tool-links a:focus-visible,
+    .top-nav a:focus-visible {
       border-color: #2563eb;
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      outline: none;
     }
 
     .field-space {
@@ -354,10 +359,10 @@
           <div class="section-title">Enter your each way bet</div>
 
           <label for="stake">Stake per part</label>
-          <input id="stake" type="number" min="0" step="0.01" value="10" placeholder="e.g. 10" />
-          <div class="helper">
-            Stake per part means the amount placed on each half of the each way bet. A €10 each way
-            bet costs €20 total: €10 on the win part and €10 on the place part.
+          <input id="stake" type="number" min="0" step="0.01" value="10" placeholder="e.g. 10" aria-describedby="stakeHelp errorBox" />
+          <div class="helper" id="stakeHelp">
+            Enter the win-part stake only. The same amount is also placed on the place part, so the
+            total stake is doubled. Example: €10 each-way = €10 win + €10 place = €20 total stake.
           </div>
 
           <div class="field-space"></div>
@@ -371,7 +376,7 @@
           <div class="field-space"></div>
 
           <label for="oddsValue">Win odds</label>
-          <input id="oddsValue" value="8/1" placeholder="e.g. 8/1" />
+          <input id="oddsValue" value="8/1" placeholder="e.g. 8/1" aria-describedby="errorBox" />
 
           <div class="field-space"></div>
 
@@ -386,14 +391,14 @@
           <div class="field-space"></div>
 
           <label for="places">Places paid</label>
-          <input id="places" type="number" min="1" step="1" value="4" placeholder="e.g. 4" />
+          <input id="places" type="number" min="1" step="1" value="4" placeholder="e.g. 4" aria-describedby="errorBox" />
 
           <div class="field-space"></div>
 
           <div class="section-title">Quick examples</div>
           <div class="example-buttons" id="exampleButtons"></div>
 
-          <div class="error" id="errorBox"></div>
+          <div class="error" id="errorBox" role="alert" aria-live="polite"></div>
         </div>
 
         <div>
@@ -454,12 +459,19 @@
       </div>
 
       <div class="content-block">
-        <h2>Common each way examples</h2>
+        <h2>Worked example</h2>
         <ul>
-          <li>€10 each way at 8/1 and 1/4 odds costs €20 total.</li>
+          <li>Enter €10 as the stake per part. The total stake is €20: €10 win plus €10 place.</li>
+          <li>At 8/1 with 1/4 place terms, the place odds are 2/1.</li>
           <li>If it wins, the win part returns €90 and the place part returns €30, for €120 total.</li>
           <li>If it places without winning, only the place part returns €30, which is €10 profit after the €20 total stake.</li>
         </ul>
+      </div>
+
+      <div class="content-block">
+        <h2>FAQ</h2>
+        <p><strong>Does “€10 each way” mean €10 total?</strong> No. It usually means €10 on the win part and €10 on the place part, so €20 total stake.</p>
+        <p><strong>What happens if the selection loses?</strong> Both the win and place parts lose, so the return is €0 and the loss is the full total stake.</p>
       </div>
 
       <div class="content-block">
@@ -541,8 +553,16 @@
       const numerator = Number(parts[0]);
       const denominator = Number(parts[1]);
 
-      if (!Number.isFinite(numerator) || !Number.isFinite(denominator) || numerator < 0 || denominator <= 0) {
+      if (!Number.isFinite(numerator) || !Number.isFinite(denominator)) {
         throw new Error("Fractional odds must be valid numbers like 8/1");
+      }
+
+      if (numerator <= 0) {
+        throw new Error("Fractional odds numerator must be greater than 0");
+      }
+
+      if (denominator <= 0) {
+        throw new Error("Fractional odds denominator must be greater than 0");
       }
 
       return numerator / denominator + 1;
